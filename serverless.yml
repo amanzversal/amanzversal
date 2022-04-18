@@ -1,0 +1,28 @@
+service: myservice
+
+frameworkVersion: 3.13.0
+
+provider:
+  name: aws
+  runtime: go1.x
+
+package:
+  artifact: ./bin/hello.zip
+
+plugins:
+  - serverless-offline
+functions:
+  hello:
+    handler: hello
+    events:
+      - httpApi:
+          path: /hello
+          method: get
+  world:
+    handler: bin/world
+    events:
+      - httpApi:
+          path: /world
+          method: get
+
+
